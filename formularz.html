@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kontakt</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --text: #1d2330;
+      --muted: #5b6474;
+      --accent: #2554d8;
+      --accent-dark: #1b3fa6;
+      --border: #d7dbe3;
+      --error: #c62828;
+      --error-bg: #fdecec;
+      --success: #1e7d3a;
+      --success-bg: #e8f5ec;
+      --info: #1b3fa6;
+      --info-bg: #e8eefc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.5;
+    }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 32px 16px 48px; }
+    header h1 { margin: 0 0 8px; font-size: 2rem; }
+    header p { margin: 0; color: var(--muted); max-width: 640px; }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 28px 0;
+    }
+    .photo {
+      aspect-ratio: 4 / 3;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #c9d6f5, #eef2fb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      overflow: hidden;
+    }
+    .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .card h2 { margin: 0 0 16px; font-size: 1.35rem; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { margin-bottom: 16px; }
+    label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.95rem; }
+    .optional { font-weight: 400; color: var(--muted); }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font: inherit;
+      color: var(--text);
+      background: #fff;
+    }
+    textarea { min-height: 140px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+    [aria-invalid="true"] { border-color: var(--error); }
+    .field-error { color: var(--error); font-size: 0.85rem; min-height: 1em; margin-top: 4px; }
+    .hp-field { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+    button {
+      background: var(--accent);
+      color: #fff;
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 22px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:hover { background: var(--accent-dark); }
+    button:disabled { opacity: 0.6; cursor: wait; }
+    .status { margin-top: 16px; padding: 12px 14px; border-radius: 8px; font-size: 0.95rem; }
+    .status--success { background: var(--success-bg); color: var(--success); }
+    .status--info { background: var(--info-bg); color: var(--info); }
+    .status--error { background: var(--error-bg); color: var(--error); }
+    .rodo { margin-top: 18px; font-size: 0.8rem; color: var(--muted); }
+    .rodo a { color: var(--accent); }
+    @media (max-width: 640px) {
+      .gallery { grid-template-columns: 1fr; }
+      .row { grid-template-columns: 1fr; gap: 0; }
+      header h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- ===== TREŚĆ DO PODMIANY: nazwa i opis ===== -->
+    <header>
+      <h1>Narzędzia PL </h1>
+      <p>Szukasz odpowiednich narzędzi dla siebie? Jesteś we właściwym miejsc! </p>
+    </header>
+
+    <!-- ===== ZDJĘCIA: zamień zawartość .photo na <img src="sciezka/do/zdjecia.jpg" alt="Opis zdjęcia"> ===== -->
+    <section class="gallery" aria-label="Zdjęcia">
+      <div class="photo"><img src="zdjecie1.jpg" alt="Zdjęcie 1"></div>
+      <div class="photo"><img src="zdjecie2.jpg" alt="Zdjęcie 2"></div>
+      <div class="photo"><img src="zdjecie3.jpg" alt="Zdjęcie 3"></div>
+    </section>
+
+    <section class="card">
+      <h2>Napisz do nas</h2>
+
+      <form id="lead-form">
+        <div class="row">
+          <div class="field">
+            <label for="name">Imię i nazwisko <span class="optional">(opcjonalnie)</span></label>
+            <input id="name" name="name" type="text" autocomplete="name" maxlength="200">
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" autocomplete="email" required maxlength="254" aria-describedby="email-error">
+            <div class="field-error" id="email-error"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="phone">Telefon <span class="optional">(opcjonalnie)</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="30">
+          </div>
+          <div class="field">
+            <label for="product">Czego dotyczy zapytanie? <span class="optional">(opcjonalnie)</span></label>
+            <select id="product" name="product">
+              <option value="">— wybierz —</option>
+              <option value="Oferta podstawowa">Oferta podstawowa</option>
+              <option value="Oferta rozszerzona">Oferta rozszerzona</option>
+              <option value="Współpraca">Współpraca</option>
+              <option value="Inne">Inne</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="message">Wiadomość</label>
+          <textarea id="message" name="message" required maxlength="5000" aria-describedby="message-error"></textarea>
+          <div class="field-error" id="message-error"></div>
+        </div>
+
+        <!-- Pole-pułapka dla botów (honeypot). Człowiek go nie widzi. Nie usuwaj. -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="extra_field">Zostaw to pole puste</label>
+          <input id="extra_field" name="extra_field" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button type="submit" id="submit-btn">Wyślij zapytanie</button>
+
+        <div id="form-status" class="status" role="status" aria-live="polite" hidden></div>
+
+        <!-- ===== KLAUZULA RODO DO UZUPEŁNIENIA ===== -->
+        <p class="rodo">
+          Administratorem Twoich danych osobowych jest [NAZWA FIRMY, ADRES]. Dane przetwarzamy wyłącznie w celu odpowiedzi na Twoje zapytanie
+          (art. 6 ust. 1 lit. b i f RODO). Więcej informacji, w tym o Twoich prawach, znajdziesz w <a href="#">Polityce prywatności</a>.
+        </p>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    const CONFIG = {
+      WEBHOOK_URL: 'http://localhost:5678/webhook/form-intake',
+      TIMEOUT_MS: 15000
+    };
+
+    const FIELD_ERRORS = {
+      'email is required': { field: 'email', text: 'Podaj adres e-mail.' },
+      'email format is invalid': { field: 'email', text: 'Ten adres e-mail wygląda na niepoprawny.' },
+      'message is required': { field: 'message', text: 'Napisz, w czym możemy pomóc.' }
+    };
+
+    const startedAt = Date.now();
+    const form = document.getElementById('lead-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const statusBox = document.getElementById('form-status');
+
+    function showStatus(type, text) {
+      statusBox.className = 'status status--' + type;
+      statusBox.textContent = text;
+      statusBox.hidden = false;
+    }
+
+    function clearFieldErrors() {
+      form.querySelectorAll('.field-error').forEach(el => { el.textContent = ''; });
+      form.querySelectorAll('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
+    }
+
+    function showFieldError(fieldName, text) {
+      const input = form.elements[fieldName];
+      const errorEl = document.getElementById(fieldName + '-error');
+      if (input) input.setAttribute('aria-invalid', 'true');
+      if (errorEl) errorEl.textContent = text;
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearFieldErrors();
+      statusBox.hidden = true;
+
+      const payload = {
+        name: form.elements.name.value,
+        email: form.elements.email.value,
+        phone: form.elements.phone.value,
+        product: form.elements.product.value,
+        message: form.elements.message.value,
+        extra_field: form.elements.extra_field.value,
+        fill_ms: Date.now() - startedAt
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Wysyłanie…';
+
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), CONFIG.TIMEOUT_MS);
+
+      try {
+        const response = await fetch(CONFIG.WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+
+        let data = {};
+        try { data = await response.json(); } catch (e) { data = {}; }
+
+        if (response.ok && data.status === 'accepted') {
+          form.reset();
+          showStatus('success', 'Dziękujemy! Zgłoszenie zostało przyjęte. Numer zgłoszenia: ' + (data.correlationId || '—'));
+        } else if (response.ok && data.status === 'duplicate') {
+          showStatus('info', 'To zgłoszenie już do nas dotarło. Odezwiemy się wkrótce.');
+        } else if (response.status === 400 && Array.isArray(data.errors)) {
+          const unknown = [];
+          data.errors.forEach(err => {
+            const mapped = FIELD_ERRORS[err];
+            if (mapped) showFieldError(mapped.field, mapped.text);
+            else unknown.push(err);
+          });
+          showStatus('error', unknown.length ? 'Popraw dane: ' + unknown.join(', ') : 'Popraw zaznaczone pola i wyślij ponownie.');
+        } else {
+          showStatus('error', 'Nie udało się wysłać zgłoszenia. Twoje dane zostały w formularzu. Spróbuj ponownie za kilka minut.');
+        }
+      } catch (error) {
+        showStatus('error', 'Brak połączenia z serwerem. Twoje dane zostały w formularzu. Spróbuj ponownie za chwilę.');
+      } finally {
+        clearTimeout(timer);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Wyślij zapytanie';
+      }
+    });
+  </script>
+</body>
+</html>
